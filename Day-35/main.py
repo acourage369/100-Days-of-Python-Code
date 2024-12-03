@@ -34,6 +34,5 @@ if will_rain:
         from_= os.getenv("TWILIO_PHONE_NUMBER"),
         to=os.getenv("RECIPIENT_PHONE_NUMBER"),
     )
-
     print(message.status)
 
