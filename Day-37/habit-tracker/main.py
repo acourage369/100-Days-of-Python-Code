@@ -15,28 +15,28 @@ user_params = {
     "notMinor": "yes",
 }
 # CREATING A USER ON PIXELA
-# response = requests.post(url=pixela_endpoint, json=user_params)
-# print(response.text)
+response = requests.post(url=pixela_endpoint, json=user_params)
+print(response.text)
 
 # CREATING A GRAPH
-# graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
-#
-# graph_config = {
-#     "id": GRAPH_ID,
-#     "name": "Coding Graph",
-#     "unit": "km",
-#     "type": "float",
-#     "color": "momiji",
-# }
-#
+graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
+
+graph_config = {
+    "id": GRAPH_ID,
+    "name": "Coding Graph",
+    "unit": "km",
+    "type": "float",
+    "color": "momiji",
+}
+
 headers = {
     "X-USER-TOKEN" : TOKEN
 }
 
-# response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
-# print(response.text)
+response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
+print(response.text)
 
-# UPDATE A PIXEL TO GRAPH ON PIXELA
+# ADDING A PIXEL TO GRAPH ON PIXELA
 
 pixel_creation_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}"
 
@@ -48,3 +48,20 @@ pixel_data = {
 #
 response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
 print(response.text)
+
+# UPDATING THE GRAPH
+update_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}/{today.strftime("%Y%m%d")}"
+
+new_pixel_data = {
+    "quantity": "3.5",
+}
+
+response = requests.put(url=update_endpoint, json=new_pixel_data, headers=headers)
+print(response.text)
+
+# DELETION
+delete_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}/{today.strftime("%Y%m%d")}"
+
+response = requests.delete(url=delete_endpoint, headers=headers)
+print(response.text)
+
